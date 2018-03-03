@@ -1,0 +1,4 @@
+FROM alpine:3.7
+RUN apk add --no-cache postfix
+COPY postfix/entrypoint.sh /entrypoint.sh
+CMD ["/entrypoint.sh"]

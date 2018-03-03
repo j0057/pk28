@@ -1,0 +1,9 @@
+FROM alpine:3.7
+
+RUN apk add --no-cache dovecot
+
+#COPY dovecot/entrypoint.sh /entrypoint.sh
+#ENTRYPOINT ["/entrypoint.sh"]
+#CMD ["start"]
+
+CMD ["/usr/sbin/dovecot", "-F", "-c", "/etc/dovecot/dovecot.conf"]

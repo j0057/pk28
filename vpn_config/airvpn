@@ -1,0 +1,84 @@
+#!/bin/bash
+
+: ${AIRVPN_USERNAME:?missing environment variable}
+: ${AIRVPN_PASSWORD:?missing environment variable}
+: ${AIRVPN_API_KEY:?missing environment variable}
+
+AIRVPN_CONTINENT=${AIRVPN_CONTINENT:-Europe}
+
+install -d -m 700 /tmp/$(id -un)
+cookies=/tmp/$(id -un)/airvpn.dat
+
+case $1 in
+    get_auth_key)
+        curl 'https://airvpn.org/' -s -c $cookies \
+            | sed -n "/auth_key/{s/.*value=\x27\(.*\)\x27.*/\1/g ; p }"
+        ;;
+
+    login)
+        auth_key=$($0 get_auth_key)
+        curl 'https://airvpn.org/index.php?app=core&module=global&section=login&do=process' -s -b $cookies -c $cookies -L \
+                -d referer=https://airvpn.org/ \
+                -d auth_key=$auth_key \
+                -d ips_username=$AIRVPN_USERNAME \
+                -d ips_password=$AIRVPN_PASSWORD \
+                -d rememberMe=0 \
+            | grep $AIRVPN_USERNAME 1>/dev/null || echo 'login did not seem to work!' >&2
+        ;;
+
+    get_ports)
+        curl 'https://airvpn.org/ports/' -s -b $cookies -c $cookies \
+            | xmllint --html --format - 2>/dev/null \
+            | sed -n '/ports_button_remove/{s/.*value="\(.*\)".*/\1/; p}' \
+            | grep -v '^4614$' # XXX: temporary hack while I still have my old stuff running
+        ;;
+
+    get_csrf_token)
+        curl 'https://airvpn.org/ports/' -s -b $cookies -c $cookies \
+            | xmllint --html --format - 2>/dev/null \
+            | sed -n '/csrf_token/{s/.*value="\([0-9a-f]*\)".*/\1/; p}'
+        ;;
+
+    del_port)
+        port=${2:?missing port number}
+        csrf_token=$($0 get_csrf_token)
+        curl 'https://airvpn.org/ports/' -s -b $cookies -c $cookies -f \
+            -d csrf_token=$csrf_token \
+            -d action=delete_$port \
+            -o /dev/null
+        ;;
+
+    new_port)
+        csrf_token=$($0 get_csrf_token)
+        curl 'https://airvpn.org/ports/' -s -b $cookies -c $cookies -f \
+            -d csrf_token=$csrf_token \
+            -d action=ports_ins \
+            -d port_ins_port=56431 \
+            -d port_ins_protocol=both \
+            -d port_ins_local= \
+            -d port_ins_dns_name= \
+            -d port_ins=port_ins \
+            -o /dev/null
+        ;;
+
+    get_status)
+        curl "https://airvpn.org/api/?service=status&format=json&key=$AIRVPN_API_KEY" -s
+        ;;
+
+    get_random_ip)
+        $0 get_status \
+            | jq -r ".servers | .[] | select(.health == \"ok\") | select(.continent == \"$AIRVPN_CONTINENT\") | .ip_entry" \
+            | shuf \
+            | head -1
+        ;;
+
+    regenerate_config)
+        conf=${2:?missing config file name}
+        $0 login
+        $0 new_port
+        $0 del_port $($0 get_ports | head -1)
+        echo "VPN_IP=$($0 get_random_ip)" > $conf~
+        echo "VPN_PORT=$($0 get_ports | head -1)" >> $conf~
+        mv $conf~ $conf
+        ;;
+esac

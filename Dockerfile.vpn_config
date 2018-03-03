@@ -1,0 +1,4 @@
+FROM alpine:3.7
+RUN apk add --no-cache bash curl libxml2-utils jq
+COPY vpn_config/airvpn /usr/local/bin
+CMD ["/usr/local/bin/airvpn", "regenerate_config", "/etc/vpnconfig/vpn.conf"]

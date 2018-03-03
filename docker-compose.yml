@@ -1,0 +1,89 @@
+version: '3.5'
+
+services:
+
+    postfix:
+        build:
+            context: .
+            dockerfile: Dockerfile.postfix
+
+    dovecot:
+        build:
+            context: .
+            dockerfile: Dockerfile.dovecot
+
+    postgrey:
+        build:
+            context: .
+            dockerfile: Dockerfile.postgrey
+
+    policyd_spf:
+        build:
+            context: .
+            dockerfile: Dockerfile.policyd_spf
+
+    opendkim:
+        build:
+            context: .
+            dockerfile: Dockerfile.opendkim
+
+    openldap:
+        build:
+            context: .
+            dockerfile: Dockerfile.openldap
+        ports:
+            - "389:389"
+
+    vpn_config:
+        build:
+            context: .
+            dockerfile: Dockerfile.vpn_config
+        env_file: .vpn.env
+        volumes:
+            - vpn_config:/etc/vpnconfig
+
+    openvpn:
+        build:
+            context: .
+            dockerfile: Dockerfile.openvpn
+        privileged: true
+        volumes:
+            - vpn_config:/etc/vpnconfig
+
+    transmission:
+        build:
+            context: .
+            dockerfile: Dockerfile.transmission
+        depends_on:
+            - openvpn
+        cap_add:
+            - NET_ADMIN
+        ports:
+            - "9091:9091"
+
+    privoxy:
+        build:
+            context: .
+            dockerfile: Dockerfile.privoxy
+        depends_on:
+            - openvpn
+        networks:
+            - default
+            - vpn
+        cap_add:
+            - NET_ADMIN
+        ports:
+            - "8118:8118"
+
+volumes:
+    vpn_config: ~
+
+networks:
+    default: ~
+
+    vpn:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+            - subnet: 172.66.6.0/24
