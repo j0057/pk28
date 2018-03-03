@@ -16,6 +16,7 @@ case $1 in
         ;;
 
     login)
+        echo 'logging in' >&2
         auth_key=$($0 get_auth_key)
         curl 'https://airvpn.org/index.php?app=core&module=global&section=login&do=process' -s -b $cookies -c $cookies -L \
                 -d referer=https://airvpn.org/ \
@@ -27,6 +28,7 @@ case $1 in
         ;;
 
     get_ports)
+        echo 'getting ports' >&2
         curl 'https://airvpn.org/ports/' -s -b $cookies -c $cookies \
             | xmllint --html --format - 2>/dev/null \
             | sed -n '/ports_button_remove/{s/.*value="\(.*\)".*/\1/; p}' \
@@ -34,6 +36,7 @@ case $1 in
         ;;
 
     get_csrf_token)
+        echo 'getting csrf token' >&2
         curl 'https://airvpn.org/ports/' -s -b $cookies -c $cookies \
             | xmllint --html --format - 2>/dev/null \
             | sed -n '/csrf_token/{s/.*value="\([0-9a-f]*\)".*/\1/; p}'
@@ -42,6 +45,7 @@ case $1 in
     del_port)
         port=${2:?missing port number}
         csrf_token=$($0 get_csrf_token)
+        echo "deleting port $port" >&2
         curl 'https://airvpn.org/ports/' -s -b $cookies -c $cookies -f \
             -d csrf_token=$csrf_token \
             -d action=delete_$port \
@@ -50,10 +54,12 @@ case $1 in
 
     new_port)
         csrf_token=$($0 get_csrf_token)
+        port=${2:-} # empty is OK
+        echo "adding port $port" >&2
         curl 'https://airvpn.org/ports/' -s -b $cookies -c $cookies -f \
             -d csrf_token=$csrf_token \
             -d action=ports_ins \
-            -d port_ins_port=56431 \
+            -d port_ins_port=$port \
             -d port_ins_protocol=both \
             -d port_ins_local= \
             -d port_ins_dns_name= \
@@ -61,11 +67,22 @@ case $1 in
             -o /dev/null
         ;;
 
+    get_random_port)
+        csrf_token=$($0 get_csrf_token)
+        echo "getting random port" >&2
+        curl 'https://airvpn.org/ports/' -s -b $cookies -c $cookies -f -d csrf_token=$csrf_token -d action=graph \
+            | xmllint --html --format - 2>/dev/null \
+            | sed -n '/port_free/{s/.* \([0-9]\+\),.*/\1/; p}' \
+            | shuf \
+            | head -1
+        ;;
+
     get_status)
         curl "https://airvpn.org/api/?service=status&format=json&key=$AIRVPN_API_KEY" -s
         ;;
 
     get_random_ip)
+        echo "get random server IP" >&2
         $0 get_status \
             | jq -r ".servers | .[] | select(.health == \"ok\") | select(.continent == \"$AIRVPN_CONTINENT\") | .ip_entry" \
             | shuf \
@@ -74,9 +91,10 @@ case $1 in
 
     regenerate_config)
         conf=${2:?missing config file name}
+        rm -f $conf
         $0 login
-        $0 new_port
-        $0 del_port $($0 get_ports | head -1)
+        $0 get_ports | xargs -n 1 $0 del_port
+        $0 new_port $($0 get_random_port)
         echo "VPN_IP=$($0 get_random_ip)" > $conf~
         echo "VPN_PORT=$($0 get_ports | head -1)" >> $conf~
         mv $conf~ $conf
