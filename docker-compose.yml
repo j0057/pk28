@@ -38,7 +38,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile.vpn_config
-        env_file: .vpn.env
+        env_file: conf/vpn.conf
         volumes:
             - vpn_config:/etc/vpnconfig
 
