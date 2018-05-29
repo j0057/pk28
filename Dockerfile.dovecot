@@ -1,7 +1,9 @@
 FROM alpine:3.7
 RUN apk --no-cache upgrade
 RUN apk --no-cache add dovecot
-#COPY dovecot/entrypoint.sh /entrypoint.sh
-#ENTRYPOINT ["/entrypoint.sh"]
-#CMD ["start"]
 CMD ["/usr/sbin/dovecot", "-F", "-c", "/etc/dovecot/dovecot.conf"]
+EXPOSE 110
+EXPOSE 143
+COPY dovecot/dovecot.conf /etc/dovecot/
+COPY dovecot/dovecot-ldap.conf /etc/dovecot/dovecot-ldap.conf.ext
+RUN ln -s dovecot-ldap.conf.ext /etc/dovecot/dovecot-userdb.conf.ext
