@@ -75,6 +75,17 @@ services:
         ports:
             - "8118:8118"
 
+    # samba
+    # nfs
+    # dlna
+    # cupsd
+
+    # bind9
+
+    # graylog/ELK/splunk
+
+    # python apps
+
 volumes:
     vpn_config: ~
 
