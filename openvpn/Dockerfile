@@ -8,10 +8,10 @@ RUN mkdir -m 755 -p /dev/net && mknod /dev/net/tun c 10 200 && chmod -v 666 /dev
 COPY openvpn.conf /etc/openvpn/
 COPY *.crt /etc/openvpn/
 COPY *.key /etc/openvpn/
+COPY entrypoint.sh /
 
 STOPSIGNAL SIGTERM
-CMD iptables -t nat -A POSTROUTING -o tun0 -s 172.16.0.0/12 -j MASQUERADE \
-    && exec openvpn --config /etc/openvpn/openvpn.conf --remote 213.152.161.169
+CMD ["/entrypoint.sh"]
 
 #*filter
 #:INPUT ACCEPT [0:0]

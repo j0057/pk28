@@ -33,6 +33,8 @@ services:
         privileged: true
         volumes:
             - vpn_config:/etc/vpnconfig
+        depends_on:
+            - openvpn_config
 
     transmission:
         build: transmission
