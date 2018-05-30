@@ -1,0 +1,1 @@
+data.ldif       filter=git-crypt-openldap   diff=git-crypt-openldap

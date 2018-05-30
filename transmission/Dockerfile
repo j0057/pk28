@@ -1,12 +1,8 @@
 FROM alpine:3.7
-
-RUN apk add --no-cache \
-    bind-tools \
-    transmission-daemon \
-    transmission-cli
-
+RUN apk --no-cache upgrade
+RUN apk --no-cache add bind-tools
+RUN apk --no-cache add transmission-daemon transmission-cli
 EXPOSE 9091
-
 CMD ip route del default \
     && ip route add default via $(dig +short openvpn) \
     && exec transmission-daemon \

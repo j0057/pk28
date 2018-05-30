@@ -4,6 +4,6 @@ RUN apk --no-cache add dovecot
 CMD ["/usr/sbin/dovecot", "-F", "-c", "/etc/dovecot/dovecot.conf"]
 EXPOSE 110
 EXPOSE 143
-COPY dovecot/dovecot.conf /etc/dovecot/
-COPY dovecot/dovecot-ldap.conf /etc/dovecot/dovecot-ldap.conf.ext
+COPY dovecot.conf /etc/dovecot/
+COPY dovecot-ldap.conf /etc/dovecot/dovecot-ldap.conf.ext
 RUN ln -s dovecot-ldap.conf.ext /etc/dovecot/dovecot-userdb.conf.ext

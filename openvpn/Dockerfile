@@ -1,12 +1,13 @@
 FROM alpine:3.7
 
-RUN apk add --no-cache openvpn
+RUN apk --no-cache upgrade
+RUN apk --no-cache add openvpn
 
 RUN mkdir -m 755 -p /dev/net && mknod /dev/net/tun c 10 200 && chmod -v 666 /dev/net/tun
 
-COPY openvpn/openvpn.conf /etc/openvpn/
-COPY openvpn/*.crt /etc/openvpn/
-COPY openvpn/*.key /etc/openvpn/
+COPY openvpn.conf /etc/openvpn/
+COPY *.crt /etc/openvpn/
+COPY *.key /etc/openvpn/
 
 STOPSIGNAL SIGTERM
 CMD iptables -t nat -A POSTROUTING -o tun0 -s 172.16.0.0/12 -j MASQUERADE \

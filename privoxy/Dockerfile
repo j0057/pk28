@@ -1,8 +1,8 @@
 FROM alpine:3.7
 
-RUN apk add --no-cache \
-    bind-tools \
-    privoxy
+RUN apk --no-cache upgrade
+RUN apk --no-cache add bind-tools
+RUN apk --no-cache add privoxy
 
 RUN sed -i '/^listen-address / s/^.*$/listen-address :8118/' /etc/privoxy/config
 

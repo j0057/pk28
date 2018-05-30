@@ -1,0 +1,2 @@
+*.crt           filter=git-crypt-vpn        diff=git-crypt-vpn
+*.key           filter=git-crypt-vpn        diff=git-crypt-vpn
