@@ -64,6 +64,12 @@ services:
 
     # bind9
 
+    # syncthing
+
+    # nginx
+
+    # gitea
+
     # graylog/ELK/splunk
 
     # python apps
