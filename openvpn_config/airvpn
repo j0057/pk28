@@ -6,8 +6,8 @@
 
 AIRVPN_CONTINENT=${AIRVPN_CONTINENT:-Europe}
 
-install -d -m 700 /tmp/$(id -un)
-cookies=/tmp/$(id -un)/airvpn.dat
+install -d -m 700 /tmp/$(basename $0)-$(id -un)
+cookies=/tmp/$(basename $0)-$(id -un)/airvpn.dat
 
 case $1 in
     get_auth_key)
@@ -59,11 +59,11 @@ case $1 in
         curl 'https://airvpn.org/ports/' -s -b $cookies -c $cookies -f \
             -d csrf_token=$csrf_token \
             -d action=ports_ins \
-            -d port_ins_port=$port \
-            -d port_ins_protocol=both \
-            -d port_ins_local= \
-            -d port_ins_dns_name= \
-            -d port_ins=port_ins \
+            -d ports_ins_port=$port \
+            -d ports_ins_protocol=both \
+            -d ports_ins_local= \
+            -d ports_ins_dns_name= \
+            -d ports_ins=port_ins \
             -o /dev/null
         ;;
 
