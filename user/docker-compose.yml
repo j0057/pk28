@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+
+    slapd:
+        build: openldap
+        ports:
+            - "389:389"
+        networks:
+            - net
+
+networks:
+    net: ~
