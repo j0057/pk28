@@ -1,0 +1,36 @@
+version: '3.5'
+
+services:
+
+    postfix:
+        build: postfix
+        networks:
+            - net
+
+    dovecot:
+        build: dovecot
+        networks:
+            - net
+            - user
+
+    postgrey:
+        build: postgrey
+        networks:
+            - net
+
+    policyd_spf:
+        build: policyd_spf
+        networks:
+            - net
+
+    opendkim:
+        build: opendkim
+        networks:
+            - net
+
+networks:
+    net: ~
+
+    user:
+        external:
+            name: user_net
