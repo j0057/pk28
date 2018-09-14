@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM alpine:3.8
 RUN apk --no-cache upgrade
 RUN apk --no-cache add dovecot dovecot-ldap
 CMD ["/usr/sbin/dovecot", "-F", "-c", "/etc/dovecot/dovecot.conf"]
