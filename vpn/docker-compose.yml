@@ -1,0 +1,51 @@
+version: '3.5'
+
+services:
+
+    openvpn_config:
+        build: openvpn_config
+        env_file: openvpn_config/vpn.conf
+        volumes:
+            - vpn_config:/etc/vpnconfig
+
+    openvpn:
+        build: openvpn
+        privileged: true
+        volumes:
+            - vpn_config:/etc/vpnconfig
+        depends_on:
+            - openvpn_config
+
+    transmission:
+        build: transmission
+        cap_add:
+            - NET_ADMIN
+        ports:
+            - "9091:9091"
+        depends_on:
+            - openvpn
+
+    privoxy:
+        build: privoxy
+        networks:
+            - net
+            - safe
+        cap_add:
+            - NET_ADMIN
+        ports:
+            - "8118:8118"
+        depends_on:
+            - openvpn
+
+volumes:
+    vpn_config: ~
+
+networks:
+    net: ~
+
+    safe:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+            - subnet: 172.66.6.0/24
