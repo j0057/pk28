@@ -1,3 +1,5 @@
+#!/usr/bin/env -S docker-compose -f
+
 version: '3.5'
 
 services:
@@ -6,6 +8,8 @@ services:
         build: postfix
         networks:
             - net
+        volumes:
+            - /dev/log:/dev/log
 
     dovecot:
         build: dovecot

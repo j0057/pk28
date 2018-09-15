@@ -1,0 +1,78 @@
+smtpd_banner = $myhostname ESMTP $mail_name
+biff = no
+append_dot_mydomain = no
+
+#smtpd_tls_cert_file = /etc/ssl/private/j0057.nl.2018.chained.crt
+#smtpd_tls_key_file = /etc/ssl/private/j0057.nl.2018.key
+smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+smtpd_tls_received_header = yes
+smtpd_tls_security_level = may
+smtpd_tls_auth_only = yes
+smtpd_tls_mandatory_protocols = !SSLv2,!SSLv3,!TLSv1,!TLSv1.1
+smtpd_tls_protocols = !SSLv2,!SSLv3,!TLSv1,!TLSv1.1
+#smtpd_tls_mandatory_cipers = medium
+
+tls_medium_cipherlist = AES128+EECDH:AES128+EDH
+tls_preempt_cipherlist = yes
+
+smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+smtp_tls_security_level = encrypt
+
+myhostname = pk28.nl
+mydomain = pk28.nl
+alias_maps = hash:/etc/postfix/aliases
+alias_database = hash:/etc/postfix/aliases
+myorigin = pk28.nl
+mydestination =
+    j0057.nl,
+    pk28.nl,
+    punosqnp.nl,
+    stomrin.nl
+relayhost =
+mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+#mailbox_command = procmail -a "$EXTENSION"
+#mailbox_size_limit = 0
+mailbox_transport = lmtp:inet:dovecot:24
+recipient_delimiter = +
+inet_interfaces = all
+inet_protocols = ipv4
+
+smtpd_sasl_type = dovecot
+smtpd_sasl_path = inet:dovecot:9001
+smtpd_sasl_auth_enable = yes
+
+smtpd_delay_reject = yes
+smtpd_helo_required = yes
+smtpd_helo_restrictions =
+  permit_mynetworks,
+  permit_sasl_authenticated,
+  reject_non_fqdn_hostname,
+  reject_invalid_hostname,
+  reject_unknown_hostname,
+  permit
+
+smtpd_sender_restrictions =
+  permit_sasl_authenticated,
+  permit_mynetworks,
+  reject_non_fqdn_sender,
+  reject_unknown_sender_domain,
+  permit
+
+smtpd_recipient_restrictions =
+  reject_unauth_pipelining,
+  reject_non_fqdn_recipient,
+  reject_unknown_recipient_domain,
+  permit_mynetworks,
+  permit_sasl_authenticated,
+  reject_unauth_destination,
+  reject_rbl_client sbl-xbl.spamhaus.org,
+  #check_policy_service unix:private/policy-spf,
+  #check_policy_service inet:127.0.0.1:10030,
+  permit
+
+#policy-spf_time_limit = 3600s
+
+#virtual_alias_maps = hash:/etc/postfix/virtual
+
+#smtpd_milters = unix:/run/opendkim/opendkim.sock
+#non_smtpd_milters = unix:/run/opendkim/opendkim.sock
