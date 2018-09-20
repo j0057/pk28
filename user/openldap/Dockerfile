@@ -11,7 +11,7 @@ COPY ldap.conf /etc/openldap/ldap.conf
 
 EXPOSE 389
 STOPSIGNAL SIGTERM
-CMD ["/usr/sbin/slapd", "-f", "/etc/openldap/slapd.conf", "-u", "ldap", "-g", "ldap", "-d", "1"]
+CMD ["/usr/sbin/slapd", "-f", "/etc/openldap/slapd.conf", "-u", "ldap", "-g", "ldap", "-d", "0"]
 
 COPY data.ldif /tmp/data.ldif
 
@@ -19,4 +19,3 @@ RUN slapd -f /etc/openldap/slapd.conf -u ldap -g ldap \
     && ldapadd -x -D 'cn=root,dc=pk28,dc=nl' -w root -f /tmp/data.ldif \
     && rm /tmp/data.ldif \
     && pkill -TERM slapd
-
