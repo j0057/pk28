@@ -66,11 +66,11 @@ smtpd_recipient_restrictions =
   permit_sasl_authenticated,
   reject_unauth_destination,
   reject_rbl_client sbl-xbl.spamhaus.org,
-  #check_policy_service unix:private/policy-spf,
+  check_policy_service inet:policyd_spf:7001,
   #check_policy_service inet:127.0.0.1:10030,
   permit
 
-#policy-spf_time_limit = 3600s
+policy-spf_time_limit = 3600s
 
 #virtual_alias_maps = hash:/etc/postfix/virtual
 
