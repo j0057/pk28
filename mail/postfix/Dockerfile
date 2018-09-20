@@ -1,7 +1,6 @@
 FROM alpine:3.8
 
-RUN apk --no-cache upgrade \
-    && apk --no-cache add postfix postfix-ldap
+RUN apk --no-cache add postfix postfix-ldap
 
 EXPOSE 25
 

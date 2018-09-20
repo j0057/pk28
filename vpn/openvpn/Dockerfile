@@ -1,6 +1,5 @@
 FROM alpine:3.8
 
-RUN apk --no-cache upgrade
 RUN apk --no-cache add openvpn
 
 RUN mkdir -m 755 -p /dev/net && mknod /dev/net/tun c 10 200 && chmod -v 666 /dev/net/tun

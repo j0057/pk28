@@ -1,7 +1,6 @@
 FROM alpine:3.8
 
-RUN apk --no-cache upgrade \
-    && apk --no-cache add dovecot dovecot-ldap
+RUN apk --no-cache add dovecot dovecot-ldap
 
 EXPOSE 110 143 9001 24
 

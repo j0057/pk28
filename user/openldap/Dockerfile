@@ -1,6 +1,5 @@
 FROM alpine:3.8
 
-RUN apk --no-cache upgrade
 RUN apk --no-cache add openldap openldap-clients openldap-back-mdb
 
 RUN install -o ldap -g ldap -m 700 -d /run/openldap
