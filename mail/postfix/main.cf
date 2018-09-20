@@ -67,7 +67,7 @@ smtpd_recipient_restrictions =
   reject_unauth_destination,
   reject_rbl_client sbl-xbl.spamhaus.org,
   check_policy_service inet:policyd_spf:7001,
-  #check_policy_service inet:127.0.0.1:10030,
+  check_policy_service inet:postgrey:7000,
   permit
 
 policy-spf_time_limit = 3600s
