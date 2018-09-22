@@ -17,21 +17,29 @@ services:
         networks:
             - net
             - sys
+        volumes:
+            - /dev/log:/dev/log
 
     postgrey:
         build: postgrey
         networks:
             - net
+        volumes:
+            - /dev/log:/dev/log
 
     policyd_spf:
         build: policyd_spf
         networks:
             - net
+        volumes:
+            - /dev/log:/dev/log
 
     opendkim:
         build: opendkim
         networks:
             - net
+        volumes:
+            - /dev/log:/dev/log
 
 networks:
     net: ~
