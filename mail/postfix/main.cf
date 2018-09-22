@@ -74,5 +74,5 @@ policy-spf_time_limit = 3600s
 
 #virtual_alias_maps = hash:/etc/postfix/virtual
 
-#smtpd_milters = unix:/run/opendkim/opendkim.sock
-#non_smtpd_milters = unix:/run/opendkim/opendkim.sock
+smtpd_milters = inet:opendkim:8891
+non_smtpd_milters = inet:opendkim:8891

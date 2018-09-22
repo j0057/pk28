@@ -40,6 +40,10 @@ services:
             - net
         volumes:
             - /dev/log:/dev/log
+            - ./dkim-keys:/etc/opendkim/keys
+            - ../dns/zones:/var/bind
+        environment:
+            ZONES: j0057.nl pk28.nl punosqnp.nl stomrin.nl mlnr.eu molenaar.email
 
 networks:
     net: ~

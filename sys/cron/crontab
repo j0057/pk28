@@ -1,1 +1,1 @@
-00-59/05 * * * * sh -c 'echo "testing cron at $(/bin/date)" | /usr/bin/logger -t cron-test'
+* * 01 * * /usr/bin/docker exec -it mail_opendkim_1 opendkim-rekey
