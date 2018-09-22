@@ -15,7 +15,7 @@ services:
         build: dovecot
         networks:
             - net
-            - user
+            - sys
 
     postgrey:
         build: postgrey
@@ -35,6 +35,6 @@ services:
 networks:
     net: ~
 
-    user:
+    sys:
         external:
-            name: user_net
+            name: sys_net
