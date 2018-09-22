@@ -13,5 +13,16 @@ services:
         volumes:
             - /dev/log:/dev/log
 
+    cron:
+        build:
+            cron
+        networks:
+            - net
+        volumes:
+            - /dev/log:/dev/log
+            - /var/run/docker.sock:/var/run/docker.sock
+        environment:
+            SMTPHOST: postfix
+
 networks:
     net: ~

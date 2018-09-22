@@ -1,0 +1,1 @@
+00-59/05 * * * * sh -c 'echo "testing cron at $(/bin/date)" | /usr/bin/logger -t cron-test'
