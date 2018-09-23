@@ -1,0 +1,22 @@
+#!/usr/bin/env -S docker-compose -f
+
+version: '3.5'
+
+services:
+
+    bind9:
+        build: bind9
+        ports:
+            - "53:53"
+        networks:
+            - net
+        volumes:
+            - /dev/log:/dev/log
+            - dns:/var/lib/dns
+
+networks:
+    net: ~
+
+volumes:
+    dns:
+        external: true
