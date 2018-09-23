@@ -4,7 +4,8 @@ RUN apk --no-cache add postfix postfix-ldap
 
 EXPOSE 25
 
-CMD ["/usr/libexec/postfix/master", "-c", "/etc/postfix", "-i"]
+ENV PATH="${PATH}:/usr/libexec/postfix"
+CMD ["master", "-c", "/etc/postfix", "-i"]
 
 RUN ["/usr/bin/newaliases"]
 
