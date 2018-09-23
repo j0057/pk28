@@ -40,8 +40,8 @@ services:
             - net
         volumes:
             - /dev/log:/dev/log
-            - ../volumes/dkim-keys:/etc/opendkim/keys
-            - ../volumes/dns-zones:/var/bind
+            - dkim:/var/lib/dkim
+            - dns:/var/lib/dns
         environment:
             ZONES: j0057.nl pk28.nl punosqnp.nl stomrin.nl mlnr.eu molenaar.email
 
@@ -51,3 +51,10 @@ networks:
     sys:
         external:
             name: sys_net
+
+volumes:
+    dkim:
+        external: true
+
+    dns:
+        external: true
