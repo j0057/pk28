@@ -8,8 +8,3 @@ CMD ["opendkim", "-f"]
 
 COPY opendkim.conf /etc/opendkim/
 COPY opendkim-rekey /usr/local/bin/
-
-RUN touch \
-    /etc/opendkim/trusted.table \
-    /etc/opendkim/signing.table \
-    /etc/opendkim/key.table

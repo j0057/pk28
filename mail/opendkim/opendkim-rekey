@@ -32,7 +32,7 @@ gen_key_table() {
                 printf '%-31s %s:%s:%s\n' "$dom-$tag" "$dom" "$tag" "$fn"
             done ; } \
         | sort \
-        > /etc/opendkim/key.table
+        > /etc/opendkim/keys/key.table
 }
 
 gen_signing_table() {
@@ -44,7 +44,7 @@ gen_signing_table() {
                 printf '%-31s %s\n' "*@$dom" "$dom-$tag"
             done ; } \
         | sort \
-        > /etc/opendkim/signing.table
+        > /etc/opendkim/keys/signing.table
 }
 
 [ "$DEBUG" = 1 ] && set -x
