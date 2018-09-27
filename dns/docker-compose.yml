@@ -8,6 +8,7 @@ services:
         build: bind9
         ports:
             - "53:53"
+            - "53:53/udp"
         networks:
             - net
         volumes:
