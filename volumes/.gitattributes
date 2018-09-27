@@ -1,0 +1,2 @@
+dns.tar.gz      filter=git-crypt-openldap   diff=git-crypt-openldap
+dkim.tar.gz     filter=git-crypt-openldap   diff=git-crypt-openldap
