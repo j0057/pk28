@@ -7,6 +7,5 @@ EXPOSE 25
 ENV PATH="${PATH}:/usr/libexec/postfix"
 CMD ["master", "-c", "/etc/postfix", "-i"]
 
-RUN ["/usr/bin/newaliases"]
-
-COPY main.cf /etc/postfix/main.cf
+COPY main.cf /etc/postfix/
+COPY ldap-aliases.conf /etc/postfix/

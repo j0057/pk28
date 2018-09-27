@@ -11,17 +11,14 @@ smtpd_tls_auth_only = yes
 smtpd_tls_mandatory_protocols = !SSLv2,!SSLv3,!TLSv1,!TLSv1.1
 smtpd_tls_protocols = !SSLv2,!SSLv3,!TLSv1,!TLSv1.1
 #smtpd_tls_mandatory_cipers = medium
-
 tls_medium_cipherlist = AES128+EECDH:AES128+EDH
 tls_preempt_cipherlist = yes
-
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 smtp_tls_security_level = encrypt
 
 myhostname = pk28.nl
 mydomain = pk28.nl
-alias_maps = hash:/etc/postfix/aliases
-alias_database = hash:/etc/postfix/aliases
+alias_maps = ldap:/etc/postfix/ldap-aliases.conf
 myorigin = pk28.nl
 mydestination =
     j0057.nl,
