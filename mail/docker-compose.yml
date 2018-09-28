@@ -19,6 +19,7 @@ services:
             - sys
         volumes:
             - /dev/log:/dev/log
+            - mail:/home
 
     postgrey:
         build: postgrey
@@ -57,4 +58,7 @@ volumes:
         external: true
 
     dns:
+        external: true
+
+    mail:
         external: true
