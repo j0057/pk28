@@ -2,10 +2,12 @@
 case "$1" in
     backup)
         docker run --rm -v dkim:/dkim -v $(pwd)/volumes:/volumes alpine:3.8 tar cvzf volumes/dkim.tar.gz dkim
-        docker run --rm -v dns:/dns -v $(pwd)/volumes:/volumes alpine:3.8 tar cvzf volumes/dns.tar.gz dns
+        docker run --rm -v dns:/dns   -v $(pwd)/volumes:/volumes alpine:3.8 tar cvzf volumes/dns.tar.gz dns
+        docker run --rm -v mail:/mail -v $(pwd)/volumes:/volumes alpine:3.8 tar cvzf mailmes/mail.tar.gz mail
         ;;
     restore)
         docker run --rm -v dkim:/dkim -v $(pwd)/volumes:/volumes alpine:3.8 tar xvzf volumes/dkim.tar.gz
-        docker run --rm -v dns:/dns -v $(pwd)/volumes:/volumes alpine:3.8 tar xvzf volumes/dns.tar.gz
+        docker run --rm -v dns:/dns   -v $(pwd)/volumes:/volumes alpine:3.8 tar xvzf volumes/dns.tar.gz
+        docker run --rm -v mail:/mail -v $(pwd)/volumes:/volumes alpine:3.8 tar xvzf volumes/mail.tar.gz
         ;;
 esac
