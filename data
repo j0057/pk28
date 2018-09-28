@@ -1,6 +1,4 @@
 #!/bin/bash -x
-dkim() { docker run --rm -v dkim:/dkim -v $(pwd)/volumes:/volumes alpine:3.8 ; }
-dns() { docker run --rm -v dns:/dns -v $(pwd)/volumes:/volumes alpine:3.8 ; }
 case "$1" in
     backup)
         docker run --rm -v dkim:/dkim -v $(pwd)/volumes:/volumes alpine:3.8 tar cvzf volumes/dkim.tar.gz dkim
