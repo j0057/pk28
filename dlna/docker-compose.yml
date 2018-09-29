@@ -1,0 +1,93 @@
+#!/usr/bin/env -S docker-compose -f
+
+version: '3.5'
+
+services:
+
+    ambient:
+        build: minidlna
+        image: minidlna
+        networks: [net]
+        cap_add: [NET_ADMIN]
+        volumes:
+            - /dev/log:/dev/log
+            - /home/jjm/sync/music/Ambient:/opt:ro
+        hostname: ambient
+
+    classical:
+        image: minidlna
+        networks: [net]
+        cap_add: [NET_ADMIN]
+        volumes:
+            - /dev/log:/dev/log
+            - /home/jjm/sync/music/Classical:/opt:ro
+        hostname: classical
+
+    dub_and_reggae:
+        image: minidlna
+        networks: [net]
+        cap_add: [NET_ADMIN]
+        volumes:
+            - /dev/log:/dev/log
+            - /home/jjm/sync/music/Dub & Reggae:/opt:ro
+        hostname: dub_and_reggae
+
+    dubstep:
+        image: minidlna
+        networks: [net]
+        cap_add: [NET_ADMIN]
+        volumes:
+            - /dev/log:/dev/log
+            - /home/jjm/sync/music/Dubstep:/opt:ro
+        hostname: dubstep
+
+    electronic:
+        image: minidlna
+        networks: [net]
+        cap_add: [NET_ADMIN]
+        volumes:
+            - /dev/log:/dev/log
+            - /home/jjm/sync/music/Electronic:/opt:ro
+        hostname: electronic
+
+    hip_hop:
+        image: minidlna
+        networks: [net]
+        cap_add: [NET_ADMIN]
+        volumes:
+            - /dev/log:/dev/log
+            - /home/jjm/sync/music/Hip-Hop:/opt:ro
+        hostname: hip_hop
+
+    metal_punk_and_surf:
+        image: minidlna
+        networks: [net]
+        cap_add: [NET_ADMIN]
+        volumes:
+            - /dev/log:/dev/log
+            - /home/jjm/sync/music/Metal & Punk & Surf:/opt:ro
+        hostname: metal_punk_and_surf
+
+    trip_hop_and_turntables:
+        image: minidlna
+        networks: [net]
+        cap_add: [NET_ADMIN]
+        volumes:
+            - /dev/log:/dev/log
+            - /home/jjm/sync/music/Trip-Hop & Turntables:/opt:ro
+        hostname: trip_hop_and_turntables
+
+    weird_and_pop:
+        image: minidlna
+        networks: [net]
+        cap_add: [NET_ADMIN]
+        volumes:
+            - /dev/log:/dev/log
+            - /home/jjm/sync/music/Weird & Pop:/opt:ro
+        hostname: weird_and_pop
+
+networks:
+    net:
+        driver: macvlan
+        driver_opts:
+            parent: mac0
