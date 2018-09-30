@@ -11,7 +11,7 @@ services:
         cap_add: [NET_ADMIN]
         volumes:
             - /dev/log:/dev/log
-            - /home/jjm/sync/music/Ambient:/opt:ro
+            - ${MUSIC_PATH}/Ambient:/opt:ro
         hostname: ambient
 
     classical:
@@ -20,7 +20,7 @@ services:
         cap_add: [NET_ADMIN]
         volumes:
             - /dev/log:/dev/log
-            - /home/jjm/sync/music/Classical:/opt:ro
+            - ${MUSIC_PATH}/Classical:/opt:ro
         hostname: classical
 
     dub_and_reggae:
@@ -29,7 +29,7 @@ services:
         cap_add: [NET_ADMIN]
         volumes:
             - /dev/log:/dev/log
-            - /home/jjm/sync/music/Dub & Reggae:/opt:ro
+            - ${MUSIC_PATH}/Dub & Reggae:/opt:ro
         hostname: dub_and_reggae
 
     dubstep:
@@ -38,7 +38,7 @@ services:
         cap_add: [NET_ADMIN]
         volumes:
             - /dev/log:/dev/log
-            - /home/jjm/sync/music/Dubstep:/opt:ro
+            - ${MUSIC_PATH}/Dubstep:/opt:ro
         hostname: dubstep
 
     electronic:
@@ -47,7 +47,7 @@ services:
         cap_add: [NET_ADMIN]
         volumes:
             - /dev/log:/dev/log
-            - /home/jjm/sync/music/Electronic:/opt:ro
+            - ${MUSIC_PATH}/Electronic:/opt:ro
         hostname: electronic
 
     hiphop:
@@ -56,7 +56,7 @@ services:
         cap_add: [NET_ADMIN]
         volumes:
             - /dev/log:/dev/log
-            - /home/jjm/sync/music/Hip-Hop:/opt:ro
+            - ${MUSIC_PATH}/Hip-Hop:/opt:ro
         hostname: hiphop
 
     metal_punk_and_surf:
@@ -65,7 +65,7 @@ services:
         cap_add: [NET_ADMIN]
         volumes:
             - /dev/log:/dev/log
-            - /home/jjm/sync/music/Metal & Punk & Surf:/opt:ro
+            - ${MUSIC_PATH}/Metal & Punk & Surf:/opt:ro
         hostname: metal_punk_and_surf
 
     triphop_and_turntables:
@@ -74,7 +74,7 @@ services:
         cap_add: [NET_ADMIN]
         volumes:
             - /dev/log:/dev/log
-            - /home/jjm/sync/music/Trip-Hop & Turntables:/opt:ro
+            - ${MUSIC_PATH}/Trip-Hop & Turntables:/opt:ro
         hostname: triphop_and_turntables
 
     weird_and_pop:
@@ -83,7 +83,7 @@ services:
         cap_add: [NET_ADMIN]
         volumes:
             - /dev/log:/dev/log
-            - /home/jjm/sync/music/Weird & Pop:/opt:ro
+            - ${MUSIC_PATH}/Weird & Pop:/opt:ro
         hostname: weird_and_pop
 
 networks:
