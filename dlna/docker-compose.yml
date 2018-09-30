@@ -50,14 +50,14 @@ services:
             - /home/jjm/sync/music/Electronic:/opt:ro
         hostname: electronic
 
-    hip_hop:
+    hiphop:
         image: minidlna
         networks: [net]
         cap_add: [NET_ADMIN]
         volumes:
             - /dev/log:/dev/log
             - /home/jjm/sync/music/Hip-Hop:/opt:ro
-        hostname: hip_hop
+        hostname: hiphop
 
     metal_punk_and_surf:
         image: minidlna
@@ -68,14 +68,14 @@ services:
             - /home/jjm/sync/music/Metal & Punk & Surf:/opt:ro
         hostname: metal_punk_and_surf
 
-    trip_hop_and_turntables:
+    triphop_and_turntables:
         image: minidlna
         networks: [net]
         cap_add: [NET_ADMIN]
         volumes:
             - /dev/log:/dev/log
             - /home/jjm/sync/music/Trip-Hop & Turntables:/opt:ro
-        hostname: trip_hop_and_turntables
+        hostname: triphop_and_turntables
 
     weird_and_pop:
         image: minidlna
