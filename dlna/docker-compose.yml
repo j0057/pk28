@@ -50,6 +50,15 @@ services:
             - ${MUSIC_PATH}/Electronic:/opt:ro
         hostname: electronic
 
+    exotic:
+        image: minidlna
+        networks: [net]
+        cap_add: [NET_ADMIN]
+        volumes:
+            - /dev/log:/dev/log
+            - ${MUSIC_PATH}/Exotic:/opt:ro
+        hostname: exotic
+
     hiphop:
         image: minidlna
         networks: [net]
