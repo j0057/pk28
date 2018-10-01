@@ -37,7 +37,7 @@ RUN rc-update add udhcpc default
 #
 
 RUN apk add --no-cache minidlna
-RUN sed -i -e 's/^#root_container=/root_container=M/' /etc/minidlna.conf
+RUN sed -i -e 's/^#root_container=.*$/root_container=M/' /etc/minidlna.conf
 
 RUN rc-update add minidlna default
 EXPOSE 8200 1900/udp
