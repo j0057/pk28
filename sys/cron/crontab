@@ -1,1 +1,6 @@
-* * 01 * * /usr/bin/docker exec -it mail_opendkim_1 opendkim-rekey
+# min    hour     mday     month    wday     command
+
+00       00       01       *        *        /usr/bin/docker exec -it mail_opendkim_1 opendkim-rekey
+
+
+# vim: set ts=9:
