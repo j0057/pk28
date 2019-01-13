@@ -1,4 +1,8 @@
-#!/bin/sh
+#!/sbin/openrc-run
+
+start() {
+    configure >/etc/rsyslog.conf
+}
 
 configure() {
     echo 'module(load="imuxsock")'
@@ -37,7 +41,3 @@ configure() {
         echo "*.* @$RSYSLOG_FORWARD"
     fi
 }
-
-configure >/etc/rsyslog.conf
-
-exec rsyslogd -n

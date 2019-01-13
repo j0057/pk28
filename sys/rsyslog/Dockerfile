@@ -1,6 +1,9 @@
 FROM joostm/alpine_openrc:3.8
 
-RUN apk add --no-cache rsyslog \
-    && rc-update add rsyslog default
+COPY config.sh /etc/init.d/rsyslog_config
 
-COPY rsyslog.conf /etc/rsyslog.conf
+RUN apk add --no-cache rsyslog \
+    && echo 'rc_need="rsyslog_config"' >> /etc/conf.d/rsyslog \
+    && echo 'rc_after="rsyslog_config"' >> /etc/conf.d/rsyslog \
+    && rc-update add rsyslog_config default \
+    && rc-update add rsyslog default
