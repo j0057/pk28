@@ -23,7 +23,6 @@ services:
             SMTPHOST: postfix
 
     syslog:
-        build: rsyslog
         image: joostm/alpine_rsyslog:3.8
         environment:
             RSYSLOG_LISTEN: "514"

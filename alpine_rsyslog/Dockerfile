@@ -1,6 +1,6 @@
 FROM joostm/alpine_openrc:3.8
 
-COPY config.sh /etc/init.d/rsyslog_config
+COPY rsyslog_config.sh /etc/init.d/rsyslog_config
 
 RUN apk add --no-cache rsyslog \
     && echo 'rc_need="rsyslog_config"' >> /etc/conf.d/rsyslog \
