@@ -10,9 +10,11 @@ services:
         networks: [net]
         cap_add: [NET_ADMIN]
         volumes:
-            - /dev/log:/dev/log
             - ${MUSIC_PATH}/Ambient:/opt:ro
         mac_address: 02:44:4C:4E:41:01
+        environment:
+            RSYSLOG_FILES: minidlna:daemon:info:/var/log/minidlna/minidlna.log
+            RSYSLOG_FORWARD: syslog:514
         hostname: ambient
 
     classical:
