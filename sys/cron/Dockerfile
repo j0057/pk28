@@ -1,12 +1,9 @@
-FROM joostm/alpine_openrc:3.8
+FROM alpine:3.9
 
-RUN apk add --no-cache rsyslog \
-    && echo -en 'module(load="imuxsock")\n*.* @syslog:514\n' >/etc/rsyslog.conf \
-    && rc-update add rsyslog default
+RUN apk --no-cache add socat
+RUN apk --no-cache add docker
 
-RUN apk add --no-cache docker
-
-COPY init.sh /etc/init.d/crond
 COPY crontab /etc/crontabs/root
 
-RUN rc-update add crond default
+CMD socat -u unix-recv:/dev/log stdout | cut -c 5- & \
+    exec crond -f
