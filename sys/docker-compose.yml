@@ -10,8 +10,6 @@ services:
             - "389:389"
         networks:
             - net
-        volumes:
-            - /dev/log:/dev/log
 
     cron:
         build: cron
