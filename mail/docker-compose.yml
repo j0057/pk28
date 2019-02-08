@@ -24,10 +24,8 @@ services:
 
     opendkim:
         build: opendkim
-        networks:
-            - net
+        networks: [net]
         volumes:
-            - /dev/log:/dev/log
             - dkim:/var/lib/dkim
             - dns:/var/lib/dns
         environment:
