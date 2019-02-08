@@ -1,19 +1,14 @@
-FROM joostm/alpine_rsyslog:3.8
+FROM alpine:3.9
 
-#
-# udhcpc (to join the home network)
-#
+RUN apk --no-cache add socat
+RUN apk --no-cache add minidlna
 
-COPY udhcpc-init.sh /etc/init.d/udhcpc
-COPY udhcpc-lease.sh /usr/share/udhcpc/default.script
-RUN rc-update add udhcpc default
+RUN sed -e "/^#root_container=/ s/.*/root_container=${MINIDLNA_ROOT_CONTAINER:-M}/" \
+        -e "/^#log_level=/ s/#log_level=\(.*\)=.*\$/log_level=\1=${MINIDLNA_LOG_LEVEL:-info}/" \
+        -e "/^#log_dir=/ s!.*!log_dir=${MINIDLNA_LOG_DIR:-/var/log/minidlna}!" \
+        -i /etc/minidlna.conf
 
-#
-# minidlna
-#
-
-RUN apk add --no-cache minidlna
-RUN sed -i -e 's/^#root_container=.*$/root_container=M/' /etc/minidlna.conf
-
-RUN rc-update add minidlna default
 EXPOSE 8200 1900/udp
+
+CMD socat pipe:/var/log/minidlna/minidlna.log stdout & \
+    exec minidlnad -d

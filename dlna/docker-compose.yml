@@ -8,107 +8,72 @@ services:
         build: minidlna
         image: minidlna
         networks: [net]
-        cap_add: [NET_ADMIN]
         volumes:
             - ${MUSIC_PATH}/Ambient:/opt:ro
-        mac_address: 02:44:4C:4E:41:01
-        environment:
-            RSYSLOG_FILES: minidlna:daemon:info:/var/log/minidlna/minidlna.log
-            RSYSLOG_FORWARD: syslog:514
         hostname: ambient
 
     classical:
         image: minidlna
         networks: [net]
-        cap_add: [NET_ADMIN]
         volumes:
-            - /dev/log:/dev/log
             - ${MUSIC_PATH}/Classical:/opt:ro
-        mac_address: 02:44:4C:4E:41:02
         hostname: classical
 
     dub_and_reggae:
         image: minidlna
         networks: [net]
-        cap_add: [NET_ADMIN]
         volumes:
-            - /dev/log:/dev/log
             - ${MUSIC_PATH}/Dub & Reggae:/opt:ro
-        mac_address: 02:44:4C:4E:41:03
         hostname: dub_and_reggae
 
     dubstep:
         image: minidlna
         networks: [net]
-        cap_add: [NET_ADMIN]
         volumes:
-            - /dev/log:/dev/log
             - ${MUSIC_PATH}/Dubstep:/opt:ro
-        mac_address: 02:44:4C:4E:41:04
         hostname: dubstep
 
     electronic:
         image: minidlna
         networks: [net]
-        cap_add: [NET_ADMIN]
         volumes:
-            - /dev/log:/dev/log
             - ${MUSIC_PATH}/Electronic:/opt:ro
-        mac_address: 02:44:4C:4E:41:05
         hostname: electronic
 
     exotic:
         image: minidlna
         networks: [net]
-        cap_add: [NET_ADMIN]
         volumes:
-            - /dev/log:/dev/log
             - ${MUSIC_PATH}/Exotic:/opt:ro
-        mac_address: 02:44:4C:4E:41:06
         hostname: exotic
 
     hiphop:
         image: minidlna
         networks: [net]
-        cap_add: [NET_ADMIN]
         volumes:
-            - /dev/log:/dev/log
             - ${MUSIC_PATH}/Hip-Hop:/opt:ro
-        mac_address: 02:44:4C:4E:41:07
         hostname: hiphop
 
     metal_punk_and_surf:
         image: minidlna
         networks: [net]
-        cap_add: [NET_ADMIN]
         volumes:
-            - /dev/log:/dev/log
             - ${MUSIC_PATH}/Metal & Punk & Surf:/opt:ro
-        mac_address: 02:44:4C:4E:41:08
         hostname: metal_punk_and_surf
 
     triphop_and_turntables:
         image: minidlna
         networks: [net]
-        cap_add: [NET_ADMIN]
         volumes:
-            - /dev/log:/dev/log
             - ${MUSIC_PATH}/Trip-Hop & Turntables:/opt:ro
-        mac_address: 02:44:4C:4E:41:09
         hostname: triphop_and_turntables
 
     weird_and_pop:
         image: minidlna
         networks: [net]
-        cap_add: [NET_ADMIN]
         volumes:
-            - /dev/log:/dev/log
             - ${MUSIC_PATH}/Weird & Pop:/opt:ro
-        mac_address: 02:44:4C:4E:41:0A
         hostname: weird_and_pop
 
 networks:
-    net:
-        driver: macvlan
-        driver_opts:
-            parent: mac0
+    net: ~
