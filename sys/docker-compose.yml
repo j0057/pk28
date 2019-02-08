@@ -22,13 +22,5 @@ services:
         environment:
             SMTPHOST: postfix
 
-    syslog:
-        image: joostm/alpine_rsyslog:3.8
-        environment:
-            RSYSLOG_LISTEN: "514"
-            RSYSLOG_LOCAL: "1"
-        networks:
-            - net
-
 networks:
     net: ~
