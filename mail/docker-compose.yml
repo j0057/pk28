@@ -16,10 +16,7 @@ services:
 
     postgrey:
         build: postgrey
-        networks:
-            - net
-        volumes:
-            - /dev/log:/dev/log
+        networks: [net]
 
     policyd_spf:
         build: policyd_spf
