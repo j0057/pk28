@@ -20,10 +20,7 @@ services:
 
     policyd_spf:
         build: policyd_spf
-        networks:
-            - net
-        volumes:
-            - /dev/log:/dev/log
+        networks: [net]
 
     opendkim:
         build: opendkim
