@@ -10,11 +10,8 @@ services:
 
     dovecot:
         build: dovecot
-        networks:
-            - net
-            - sys
+        networks: [net, sys]
         volumes:
-            - /dev/log:/dev/log
             - mail:/home
 
     postgrey:
