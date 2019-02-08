@@ -6,11 +6,7 @@ services:
 
     postfix:
         build: postfix
-        networks:
-            - net
-            - sys
-        volumes:
-            - /dev/log:/dev/log
+        networks: [net, sys]
 
     dovecot:
         build: dovecot
