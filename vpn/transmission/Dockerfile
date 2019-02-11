@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM alpine:3.9
 
 RUN apk --no-cache add bind-tools
 RUN apk --no-cache add transmission-daemon transmission-cli
