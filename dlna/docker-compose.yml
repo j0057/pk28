@@ -76,4 +76,11 @@ services:
         hostname: weird_and_pop
 
 networks:
-    net: ~
+    net:
+        driver: bridge
+        driver_opts:
+            com.docker.network.bridge.name: br-dlna
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.28.4.0/24
