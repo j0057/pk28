@@ -1,8 +1,12 @@
+#!/usr/bin/env -S docker-compose -f
+
 version: '3.5'
 
 services:
 
     openvpn_config:
+        networks:
+            - net
         build: openvpn_config
         env_file: openvpn_config/vpn.conf
         volumes:
@@ -10,6 +14,8 @@ services:
 
     openvpn:
         build: openvpn
+        networks:
+            - net
         privileged: true
         volumes:
             - vpn_config:/etc/vpnconfig
@@ -18,6 +24,8 @@ services:
 
     transmission:
         build: transmission
+        networks:
+            - net
         cap_add:
             - NET_ADMIN
         ports:
