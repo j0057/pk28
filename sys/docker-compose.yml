@@ -21,4 +21,11 @@ services:
             SMTPHOST: postfix
 
 networks:
-    net: ~
+    net:
+        driver: bridge
+        driver_opts:
+            com.docker.network.bridge.name: br-sys
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.28.1.0/24

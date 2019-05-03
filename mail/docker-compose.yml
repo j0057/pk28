@@ -32,7 +32,14 @@ services:
             ZONES: j0057.nl pk28.nl punosqnp.nl stomrin.nl mlnr.eu molenaar.email
 
 networks:
-    net: ~
+    net:
+        driver: bridge
+        driver_opts:
+            com.docker.network.bridge.name: br-mail
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.28.3.0/24
 
     sys:
         external:

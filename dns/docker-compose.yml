@@ -16,7 +16,14 @@ services:
             - dns:/var/lib/dns
 
 networks:
-    net: ~
+    net:
+        driver: bridge
+        driver_opts:
+            com.docker.network.bridge.name: br-dns
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.28.2.0/24
 
 volumes:
     dns:
