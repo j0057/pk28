@@ -13,7 +13,7 @@ COPY ldap.conf /etc/openldap/ldap.conf
 EXPOSE 389
 STOPSIGNAL SIGTERM
 CMD socat -u unix-recv:/dev/log stdout | cut -d '>' -f 2- & \
-    exec slapd -f /etc/openldap/slapd.conf -u ldap -g ldap &> /dev/null
+    exec slapd -f /etc/openldap/slapd.conf -u ldap -g ldap -d 0x100 &> /dev/null
 
 COPY data.ldif /tmp/data.ldif
 
