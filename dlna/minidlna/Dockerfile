@@ -17,4 +17,5 @@ EXPOSE 8200 1900/udp
 #USER minidlna
 
 CMD socat pipe:/var/log/minidlna/minidlna.log stdout & \
-    exec minidlnad -d
+    minidlnad & \
+    wait
