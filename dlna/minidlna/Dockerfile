@@ -13,5 +13,8 @@ RUN sed -e "/^#root_container=/     s/.*/root_container=${MINIDLNA_ROOT_CONTAINE
 
 EXPOSE 8200 1900/udp
 
+# BUG: running as non-root breaks SSDP discovery..?
+#USER minidlna
+
 CMD socat pipe:/var/log/minidlna/minidlna.log stdout & \
     exec minidlnad -d
