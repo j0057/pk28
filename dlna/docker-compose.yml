@@ -10,6 +10,7 @@ services:
         networks:
             - net
         volumes:
+            - /var/lib/minidlna
             - ${MUSIC_PATH}/Ambient:/srv:ro
         hostname: ambient
 
@@ -18,6 +19,7 @@ services:
         networks:
             - net
         volumes:
+            - /var/lib/minidlna
             - ${MUSIC_PATH}/Classical:/srv:ro
         hostname: classical
 
@@ -26,6 +28,7 @@ services:
         networks:
             - net
         volumes:
+            - /var/lib/minidlna
             - ${MUSIC_PATH}/Dub & Reggae:/srv:ro
         hostname: dub_and_reggae
 
@@ -34,6 +37,7 @@ services:
         networks:
             - net
         volumes:
+            - /var/lib/minidlna
             - ${MUSIC_PATH}/Dubstep:/srv:ro
         hostname: dubstep
 
@@ -42,6 +46,7 @@ services:
         networks:
             - net
         volumes:
+            - /var/lib/minidlna
             - ${MUSIC_PATH}/Electronic:/srv:ro
         hostname: electronic
 
@@ -50,6 +55,7 @@ services:
         networks:
             - net
         volumes:
+            - /var/lib/minidlna
             - ${MUSIC_PATH}/Exotic:/srv:ro
         hostname: exotic
 
@@ -58,6 +64,7 @@ services:
         networks:
             - net
         volumes:
+            - /var/lib/minidlna
             - ${MUSIC_PATH}/Hip-Hop:/srv:ro
         hostname: hiphop
 
@@ -66,6 +73,7 @@ services:
         networks:
             - net
         volumes:
+            - /var/lib/minidlna
             - ${MUSIC_PATH}/Metal & Punk & Surf:/srv:ro
         hostname: metal_punk_and_surf
 
@@ -74,6 +82,7 @@ services:
         networks:
             - net
         volumes:
+            - /var/lib/minidlna
             - ${MUSIC_PATH}/Trip-Hop & Turntables:/srv:ro
         hostname: triphop_and_turntables
 
@@ -82,6 +91,7 @@ services:
         networks:
             - net
         volumes:
+            - /var/lib/minidlna
             - ${MUSIC_PATH}/Weird & Pop:/srv:ro
         hostname: weird_and_pop
 
