@@ -16,6 +16,7 @@ EXPOSE 8200 1900/udp
 # BUG: running as non-root breaks SSDP discovery..?
 #USER minidlna
 
-CMD socat pipe:/var/log/minidlna/minidlna.log stdout & \
+CMD \
+    socat pipe:/var/log/minidlna/minidlna.log stdout & \
     minidlnad & \
     wait
