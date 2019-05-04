@@ -10,7 +10,7 @@ services:
         networks:
             - net
         volumes:
-            - ${MUSIC_PATH}/Ambient:/opt:ro
+            - ${MUSIC_PATH}/Ambient:/srv:ro
         hostname: ambient
 
     classical:
@@ -18,7 +18,7 @@ services:
         networks:
             - net
         volumes:
-            - ${MUSIC_PATH}/Classical:/opt:ro
+            - ${MUSIC_PATH}/Classical:/srv:ro
         hostname: classical
 
     dub_and_reggae:
@@ -26,7 +26,7 @@ services:
         networks:
             - net
         volumes:
-            - ${MUSIC_PATH}/Dub & Reggae:/opt:ro
+            - ${MUSIC_PATH}/Dub & Reggae:/srv:ro
         hostname: dub_and_reggae
 
     dubstep:
@@ -34,7 +34,7 @@ services:
         networks:
             - net
         volumes:
-            - ${MUSIC_PATH}/Dubstep:/opt:ro
+            - ${MUSIC_PATH}/Dubstep:/srv:ro
         hostname: dubstep
 
     electronic:
@@ -42,7 +42,7 @@ services:
         networks:
             - net
         volumes:
-            - ${MUSIC_PATH}/Electronic:/opt:ro
+            - ${MUSIC_PATH}/Electronic:/srv:ro
         hostname: electronic
 
     exotic:
@@ -50,7 +50,7 @@ services:
         networks:
             - net
         volumes:
-            - ${MUSIC_PATH}/Exotic:/opt:ro
+            - ${MUSIC_PATH}/Exotic:/srv:ro
         hostname: exotic
 
     hiphop:
@@ -58,7 +58,7 @@ services:
         networks:
             - net
         volumes:
-            - ${MUSIC_PATH}/Hip-Hop:/opt:ro
+            - ${MUSIC_PATH}/Hip-Hop:/srv:ro
         hostname: hiphop
 
     metal_punk_and_surf:
@@ -66,7 +66,7 @@ services:
         networks:
             - net
         volumes:
-            - ${MUSIC_PATH}/Metal & Punk & Surf:/opt:ro
+            - ${MUSIC_PATH}/Metal & Punk & Surf:/srv:ro
         hostname: metal_punk_and_surf
 
     triphop_and_turntables:
@@ -74,7 +74,7 @@ services:
         networks:
             - net
         volumes:
-            - ${MUSIC_PATH}/Trip-Hop & Turntables:/opt:ro
+            - ${MUSIC_PATH}/Trip-Hop & Turntables:/srv:ro
         hostname: triphop_and_turntables
 
     weird_and_pop:
@@ -82,7 +82,7 @@ services:
         networks:
             - net
         volumes:
-            - ${MUSIC_PATH}/Weird & Pop:/opt:ro
+            - ${MUSIC_PATH}/Weird & Pop:/srv:ro
         hostname: weird_and_pop
 
 networks:
