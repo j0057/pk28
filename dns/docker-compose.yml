@@ -7,9 +7,6 @@ services:
     bind9:
         build: bind
         image: bind
-        ports:
-            - "53:53"
-            - "53:53/udp"
         networks:
             - net
         volumes:
