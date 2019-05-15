@@ -17,6 +17,7 @@ EXPOSE 8200 1900/udp
 #USER minidlna
 
 CMD \
+    trap "killall -q socat minidlnad" SIGTERM ; \
     socat pipe:/var/log/minidlna/minidlna.log stdout & \
     minidlnad & \
     wait
