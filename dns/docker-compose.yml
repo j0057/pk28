@@ -12,7 +12,6 @@ services:
         networks:
             - net
         volumes:
-            - /dev/log:/dev/log
             - dns:/var/lib/dns
 
 networks:
