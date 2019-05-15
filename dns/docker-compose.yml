@@ -9,6 +9,13 @@ services:
         image: bind
         networks:
             - net
+        cap_drop:
+            - all
+        cap_add:
+            - SETGID
+            - SETUID
+            - NET_BIND_SERVICE
+            - SYS_RESOURCE
         volumes:
             - dns:/var/lib/dns
 
