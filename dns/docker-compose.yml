@@ -1,11 +1,12 @@
 #!/usr/bin/env -S docker-compose -f
 
-version: '3.5'
+version: '3.7'
 
 services:
 
     bind9:
-        build: bind9
+        build: bind
+        image: bind
         ports:
             - "53:53"
             - "53:53/udp"
