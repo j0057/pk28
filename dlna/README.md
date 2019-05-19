@@ -4,6 +4,21 @@ The `minidlna` image requires a directory of music to be volume-mapped into
 /opt. Read-only is better! The Docker Compose file bases this on the
 environment variable `$MUSIC_PATH`.
 
+# TL;DR
+
+Run `mrouted` _when all virtual interfaces exist_ and allow traffic to
+container network:
+
+    iptables -t mangle -A PREROUTING -d 224.0.0.0/4 -j TTL --ttl-inc 1
+    iptables -t filter -A DOCKER-USER -d 239.255.255.250/32 -o br-dlna -p udp -m udp --dport 1900 -m comment --comment "udp/ssdp" -j ACCEPT
+    iptables -t filter -A DOCKER-USER -s 192.168.178.0/24 -o br-dlna -p tcp -m tcp --dport 8200 -m comment --comment "tcp/upnp" -j ACCEPT
+    iptables -t filter -A DOCKER-USER -j RETURN
+
+Put a static route in the router for the container network. Disable IGMP
+snooping on crappy switches.
+
+Check that `/proc/net/ip_mr_*` contain route entries after a short while.
+
 ## Logging
 
 MiniDLNA insists on logging to a file on disk. It hasn't yet received the memo
@@ -67,6 +82,7 @@ So, the trick is:
 - Disable IGMP snooping on the crappy upstream TP-Link SG-108E 8-port gigabit
   switch, so that it doesn't stop routing the multicast traffic after a few 
   minutes.
+- Do hack the TTL of incoming multicast packets
 
 Docker, Inc.  helpfully documented on their [Docker and iptables][3] page that
 _"All of Docker's iptables rules are added to the DOCKER chain"_, which,
