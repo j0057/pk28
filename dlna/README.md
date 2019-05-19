@@ -91,13 +91,17 @@ But whatever. The `FORWARD` chain as configured drops any routed traffic to the
 containers. I suppose I can fix it using the `DOCKER-USER` chain. Here's hoping
 that I can get Docker to pick a more predictable name for the bridge...
 
+**TODO**: fix issue with `mrouted.service` not starting due to virtual
+interfaces not yet existing and it thus not having anywhere to make multicast
+traffic be forwarded to.
+
 Further reading:
 
 - [Multicast Routing Code in the Linux Kernel][4], Linux Journal, 2002-10-31.
 - [Multicast How-to][5], troglobit.com, <2016. (He ominously wishes the
   reader "Good luck!" in setting up multicast routing.)
 
-### Abandoned approach: running containers on the LAN
+## Abandoned approach: running containers on the LAN
 
 I first tried to use the macvlan driver, connected to a separate bridge on the
 host, and then to use busybox `udhcpc` to get an IP address on the LAN using
