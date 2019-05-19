@@ -46,14 +46,6 @@ configuration it seems to do ... _something_, however no multicast packets
 arrive as of yet in the minidlna containers. (It seems that both `ip mroute`
 and `grep . /proc/net/ip_mr_*` show that ... _something_ is happening).
 
-On ArchLinux, you should not do _any_ interesting new experiments with the
-Linux kernel if you've upgraded the kernel since the last reboot.  If there is
-a reboot pending, the kernel will not be able to load any missing modules
-because Pacman can't clean those up at a later time. God fucking dammit... This
-can of course be fixed by Pacman hooks fuckery, but it's hacky and it takes
-doing to get it right. (I haven't yet gotten it right, maybe Linux doesn't like
-loading modules from a tmpfs?) Long story short: just reboot.
-
 Of course, if or when all this is working, I'll still need to add a static
 route on the router so that clients on the LAN will be able to route into the
 docker container networks. This is actually the least of my worries...
